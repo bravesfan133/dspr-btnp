@@ -1,5 +1,6 @@
 import json
 import logging
+import re
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 from urllib.parse import urlencode
@@ -15,7 +16,6 @@ SCHEDULE_MODULE_TYPE = "Event Based Schedule"
 DEFAULT_PAGE_LIMIT = 100
 MAX_PAGES = 10
 
-DURATION_HOURS_DEFAULT = 3
 DURATION_HOURS_BY_SPORT = {
     "baseball": 3.5,
     "basketball": 3,
@@ -27,8 +27,19 @@ DURATION_HOURS_BY_SPORT = {
     "volleyball": 2.5,
 }
 
-GYMNASTICS_DUAL_HOURS = 2
-GYMNASTICS_MULTI_HOURS = 3.5
+DURATION_SETTING_KEYS = (
+    "default_duration_hours",
+    "baseball_duration_hours",
+    "basketball_duration_hours",
+    "football_duration_hours",
+    "golf_duration_hours",
+    "hockey_duration_hours",
+    "soccer_duration_hours",
+    "tennis_duration_hours",
+    "volleyball_duration_hours",
+    "gymnastics_dual_duration_hours",
+    "gymnastics_multi_duration_hours",
+)
 
 EXTRA_COMPETITORS_FIELD = "extra competitors"
 
@@ -117,27 +128,116 @@ def count_event_teams(ev: dict) -> int:
     return count
 
 
-def get_duration_minutes(ev: dict, default_minutes: int | None = None) -> int:
+def _hours_setting(settings: dict, key: str, default: float) -> float:
+    try:
+        value = float(settings.get(key))
+        if value > 0:
+            return value
+    except (TypeError, ValueError):
+        pass
+    return default
+
+
+def build_durations_from_settings(settings: dict) -> dict:
+    """Convert plugin settings into a sport-keyed duration map (hours)."""
+    return {
+        "default": _hours_setting(settings, "default_duration_hours", 3),
+        "baseball": _hours_setting(settings, "baseball_duration_hours", 3.5),
+        "basketball": _hours_setting(settings, "basketball_duration_hours", 3),
+        "football": _hours_setting(settings, "football_duration_hours", 3.5),
+        "golf": _hours_setting(settings, "golf_duration_hours", 6),
+        "hockey": _hours_setting(settings, "hockey_duration_hours", 3),
+        "soccer": _hours_setting(settings, "soccer_duration_hours", 2.5),
+        "tennis": _hours_setting(settings, "tennis_duration_hours", 3),
+        "volleyball": _hours_setting(settings, "volleyball_duration_hours", 2.5),
+        "gymnastics_dual": _hours_setting(
+            settings, "gymnastics_dual_duration_hours", 2
+        ),
+        "gymnastics_multi": _hours_setting(
+            settings, "gymnastics_multi_duration_hours", 3.5
+        ),
+    }
+
+
+def get_duration_minutes(ev: dict, durations: Optional[dict] = None) -> int:
     """Estimate event duration from the sport name and competitor count.
 
-    Uses the per-sport duration table; gymnastics depends on the number of
-    competing teams (dual meet = 2 teams, tri/quad = 3-4 teams).
+    Uses the per-sport duration map (hours), falling back to built-in
+    defaults; gymnastics depends on the number of competing teams
+    (dual meet = 2 teams, tri/quad = 3-4 teams).
     """
+    durations = durations or {}
     sport = (((ev.get("category3") or {}).get("name")) or "").lower()
 
     if "gymnastics" in sport:
         teams = count_event_teams(ev)
         if teams <= 2:
-            return int(GYMNASTICS_DUAL_HOURS * 60)
-        return int(GYMNASTICS_MULTI_HOURS * 60)
+            return int(durations.get("gymnastics_dual", 2) * 60)
+        return int(durations.get("gymnastics_multi", 3.5) * 60)
 
-    for key, hours in DURATION_HOURS_BY_SPORT.items():
+    for key in DURATION_HOURS_BY_SPORT:
         if key in sport:
+            hours = durations.get(key, DURATION_HOURS_BY_SPORT[key])
             return int(hours * 60)
 
-    if default_minutes is not None and default_minutes > 0:
-        return int(default_minutes)
-    return int(DURATION_HOURS_DEFAULT * 60)
+    return int(durations.get("default", 3) * 60)
+
+
+def _metadata_values(ev: dict, field_name: str) -> list[str]:
+    """Collect metadata entry names whose field matches `field_name`."""
+    results = []
+    for meta in ev.get("metadata") or []:
+        field = (meta or {}).get("field") or {}
+        if (field.get("name") or "").lower() == field_name.lower():
+            name = (meta.get("name") or "").strip()
+            if name:
+                results.append(name)
+    return results
+
+
+def detect_gender(ev: dict) -> str:
+    for value in _metadata_values(ev, "gender"):
+        v = value.strip().lower()
+        if v in ("men", "male", "m"):
+            return "Men"
+        if v in ("women", "female", "w"):
+            return "Women"
+    name = (((ev.get("category3") or {}).get("name")) or "")
+    match = re.search(r"\((M|W)\)\s*$", name)
+    if match:
+        return "Men" if match.group(1).upper() == "M" else "Women"
+    return ""
+
+
+def detect_sport_base(ev: dict) -> str:
+    values = _metadata_values(ev, "sports")
+    if values:
+        return values[0]
+    name = (((ev.get("category3") or {}).get("name")) or "")
+    return re.sub(r"\s*\((?:M|W)\)\s*$", "", name).strip()
+
+
+def detect_conference(ev: dict) -> str:
+    values = _metadata_values(ev, "conference rights")
+    return values[0] if values else ""
+
+
+def detect_network(ev: dict) -> str:
+    values = _metadata_values(ev, "network")
+    if not values:
+        values = _metadata_values(ev, "televised")
+    return values[0] if values else ""
+
+
+def build_genre_name(gender: str, sport_base: str) -> str:
+    """Gracenote-style genre, e.g. 'NCAA Women's Soccer'."""
+    gender = (gender or "").strip()
+    sport_base = (sport_base or "").strip()
+    if gender and sport_base:
+        return f"NCAA {gender}'s {sport_base}"
+    if sport_base:
+        return f"NCAA {sport_base}"
+    return "NCAA"
 
 
 def _editorial_title(ev: dict) -> str:
@@ -195,7 +295,7 @@ def build_event_title(ev: dict) -> str:
     return " ".join(parts).strip()
 
 
-def _parse_event(ev: dict, default_minutes: int | None = None) -> Optional[dict]:
+def _parse_event(ev: dict, durations: Optional[dict] = None) -> Optional[dict]:
     start_str = ev.get("startTime")
     if not start_str:
         return None
@@ -204,28 +304,49 @@ def _parse_event(ev: dict, default_minutes: int | None = None) -> Optional[dict]
     except (TypeError, ValueError):
         return None
 
-    duration = get_duration_minutes(ev, default_minutes)
+    duration = get_duration_minutes(ev, durations)
     end_dt = start_dt + timedelta(minutes=duration)
 
     title = build_event_title(ev)
     if not title:
         return None
 
+    home_team = ((ev.get("homeCompetitor") or {}).get("name") or "").strip()
+    away_team = ((ev.get("awayCompetitor") or {}).get("name") or "").strip()
+    gender = detect_gender(ev)
+    sport_base = detect_sport_base(ev)
+    league = (((ev.get("category3") or {}).get("name")) or "")
+    genre = build_genre_name(gender, sport_base)
+
+    if away_team and home_team:
+        subtitle = f"{away_team} at {home_team}"
+    else:
+        subtitle = _editorial_title(ev)
+
     return {
         "title": title,
         "short_name": title,
-        "subtitle": "",
+        "subtitle": subtitle,
         "description": _editorial_description(ev),
         "start_time": start_dt.isoformat(),
         "end_time": end_dt.isoformat(),
         "start_timestamp": int(start_dt.timestamp()),
         "end_timestamp": int(end_dt.timestamp()),
-        "sport": (((ev.get("category3") or {}).get("name")) or ""),
+        "sport": league,
         "sport_abbrev": "",
-        "league": (((ev.get("category3") or {}).get("name")) or ""),
+        "sport_base": sport_base,
+        "league": league,
         "league_abbrev": "",
-        "category": (((ev.get("category3") or {}).get("name")) or ""),
+        "category": league,
         "subcategory": "",
+        "gender": gender,
+        "genre": genre,
+        "conference": detect_conference(ev),
+        "network": detect_network(ev),
+        "home_team": home_team,
+        "away_team": away_team,
+        "duration_minutes": duration,
+        "date": start_dt.year,
         "is_studio": False,
         "image_url": _event_image_url(ev),
         "id": str(ev.get("id") or ""),
@@ -236,7 +357,7 @@ def fetch_bigtenplus_schedule(
     day_iso: str,
     module_id: Optional[int] = None,
     timeout: float = 30.0,
-    event_duration_minutes: Optional[int] = None,
+    durations: Optional[dict] = None,
     page_limit: int = DEFAULT_PAGE_LIMIT,
     max_pages: int = MAX_PAGES,
 ) -> list[dict]:
@@ -267,7 +388,7 @@ def fetch_bigtenplus_schedule(
             break
         data = payload.get("data") or []
         for ev in data:
-            event = _parse_event(ev, event_duration_minutes)
+            event = _parse_event(ev, durations)
             if event:
                 parsed.append(event)
 

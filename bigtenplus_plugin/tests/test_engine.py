@@ -46,7 +46,11 @@ def test_merged_settings_defaults():
     assert merged["channels_dvr_m3u_source"] == ""
     assert merged["channels_dvr_epg_lineup"] == ""
     assert merged["keyword"] == "BIG10+"
-    assert merged["event_duration_minutes"] == 180
+    assert merged["default_duration_hours"] == 3
+    assert merged["soccer_duration_hours"] == 2.5
+    assert merged["baseball_duration_hours"] == 3.5
+    assert merged["gymnastics_dual_duration_hours"] == 2
+    assert merged["gymnastics_multi_duration_hours"] == 3.5
 
 
 def test_merged_settings_overrides():

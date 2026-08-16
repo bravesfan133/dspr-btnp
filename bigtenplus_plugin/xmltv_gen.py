@@ -33,6 +33,65 @@ def _build_channel_id(entry: PlaylistEntry, prefix: str = "B1G+") -> str:
     return f"{prefix}.{name_clean}"
 
 
+def _build_categories(metadata: dict) -> list[str]:
+    categories = ["Sports", "NCAA"]
+    gender = metadata.get("gender") or ""
+    if gender:
+        categories.append(f"NCAA {gender}")
+    genre = metadata.get("genre") or ""
+    if genre and genre not in categories:
+        categories.append(genre)
+    league = metadata.get("league") or ""
+    if league and league not in categories:
+        categories.append(league)
+    conference = metadata.get("conference") or ""
+    if conference and conference not in categories:
+        categories.append(conference)
+    return categories
+
+
+def _build_keywords(metadata: dict) -> list[str]:
+    keywords = []
+    keywords.append("NCAA")
+    gender = metadata.get("gender") or ""
+    if gender:
+        keywords.append(f"NCAA {gender}")
+    genre = metadata.get("genre") or ""
+    if genre:
+        keywords.append(genre)
+    sport_base = metadata.get("sport_base") or ""
+    if sport_base:
+        keywords.append(sport_base)
+    league = metadata.get("league") or ""
+    if league:
+        keywords.append(league)
+    conference = metadata.get("conference") or ""
+    if conference:
+        keywords.append(conference)
+    away_team = metadata.get("away_team") or ""
+    if away_team:
+        keywords.append(away_team)
+    home_team = metadata.get("home_team") or ""
+    if home_team:
+        keywords.append(home_team)
+    return list(dict.fromkeys(keywords))
+
+
+def _build_description(metadata: dict) -> str:
+    parts = []
+    genre = metadata.get("genre") or ""
+    if genre:
+        parts.append(genre)
+    away_team = metadata.get("away_team") or ""
+    home_team = metadata.get("home_team") or ""
+    if away_team and home_team:
+        parts.append(f"{away_team} at {home_team}")
+    conference = metadata.get("conference") or ""
+    if conference:
+        parts.append(conference)
+    return " — ".join(parts)
+
+
 def _emit_programme(
     parent,
     channel_id: str,
@@ -42,8 +101,6 @@ def _emit_programme(
     metadata: Optional[dict] = None,
     image_url: str = "",
     is_live: bool = False,
-    is_real: bool = False,
-    show_details: bool = False,
 ):
     prog = SubElement(parent, "programme")
     prog.set("channel", channel_id)
@@ -58,53 +115,43 @@ def _emit_programme(
         icon_el = SubElement(prog, "icon")
         icon_el.set("src", image_url)
 
-    if is_real or show_details:
-        subtitle = (metadata or {}).get("subtitle")
-        if subtitle:
-            sub_el = SubElement(prog, "sub-title")
-            sub_el.set("lang", "en")
-            sub_el.text = subtitle
+    metadata = metadata or {}
 
-    if is_real:
-        desc_text = _build_description(metadata)
-        if desc_text:
-            desc_el = SubElement(prog, "desc")
-            desc_el.set("lang", "en")
-            desc_el.text = desc_text
-    elif show_details:
-        desc_text = (metadata or {}).get("description") or _build_description(metadata)
-        if desc_text:
-            desc_el = SubElement(prog, "desc")
-            desc_el.set("lang", "en")
-            desc_el.text = desc_text
-    if metadata:
-        cat_sports = SubElement(prog, "category")
-        cat_sports.set("lang", "en")
-        cat_sports.text = "Sports"
-        if not metadata.get("is_studio"):
-            cat_event = SubElement(prog, "category")
-            cat_event.set("lang", "en")
-            cat_event.text = "Sports Event"
-        sport = metadata.get("sport", "")
-        league = metadata.get("league", "")
-        subcategory = metadata.get("subcategory", "")
-        if sport:
-            cat_el = SubElement(prog, "category")
-            cat_el.set("lang", "en")
-            cat_el.text = sport
-        if league:
-            cat_el2 = SubElement(prog, "category")
-            cat_el2.set("lang", "en")
-            cat_el2.text = league
-        if subcategory and subcategory != league:
-            cat_el3 = SubElement(prog, "category")
-            cat_el3.set("lang", "en")
-            cat_el3.text = subcategory
+    subtitle = metadata.get("subtitle") or ""
+    if subtitle:
+        sub_el = SubElement(prog, "sub-title")
+        sub_el.set("lang", "en")
+        sub_el.text = subtitle
+
+    desc_text = metadata.get("description") or _build_description(metadata)
+    if desc_text:
+        desc_el = SubElement(prog, "desc")
+        desc_el.set("lang", "en")
+        desc_el.text = desc_text
+
+    date = metadata.get("date")
+    if date:
+        date_el = SubElement(prog, "date")
+        date_el.text = str(date)
+
+    duration = metadata.get("duration_minutes")
+    if duration and int(duration) > 0:
+        length_el = SubElement(prog, "length")
+        length_el.set("units", "minutes")
+        length_el.text = str(int(duration))
+
+    for cat in _build_categories(metadata):
+        cat_el = SubElement(prog, "category")
+        cat_el.set("lang", "en")
+        cat_el.text = cat
+
+    for keyword in _build_keywords(metadata):
+        kw_el = SubElement(prog, "keyword")
+        kw_el.set("lang", "en")
+        kw_el.text = keyword
 
     if is_live:
         SubElement(prog, "live")
-    if is_real:
-        SubElement(prog, "new")
 
 
 def generate_xmltv(
@@ -156,8 +203,6 @@ def generate_xmltv(
                 end_dt=real_start,
                 metadata=metadata,
                 image_url=image_url,
-                is_real=False,
-                show_details=True,
             )
 
         _emit_programme(
@@ -168,7 +213,6 @@ def generate_xmltv(
             metadata=metadata,
             image_url=image_url,
             is_live=not is_studio,
-            is_real=True,
         )
 
         ended_end_pt = real_end + timedelta(hours=ENDED_HORIZON_HOURS)
@@ -179,30 +223,12 @@ def generate_xmltv(
             end_dt=ended_end_pt,
             metadata=metadata,
             image_url=image_url,
-            is_real=False,
-            show_details=True,
         )
 
     rough_string = tostring(root, encoding="unicode")
     reparsed = minidom.parseString(rough_string.encode("utf-8"))
     pretty = reparsed.toprettyxml(indent="  ", encoding="utf-8")
     return pretty.decode("utf-8") if isinstance(pretty, bytes) else pretty
-
-
-def _build_description(metadata: dict) -> str:
-    parts = []
-    extra = []
-    if metadata.get("league"):
-        extra.append(metadata["league"])
-    if metadata.get("subcategory") and metadata["subcategory"] != metadata.get("league"):
-        extra.append(metadata["subcategory"])
-    if metadata.get("sport"):
-        extra.append(metadata["sport"])
-    if extra:
-        parts.append(" | ".join(extra))
-    if metadata.get("is_studio"):
-        parts.append("Studio show")
-    return " — ".join(parts)
 
 
 def get_channel_id(entry: PlaylistEntry, prefix: str = "B1G+") -> str:

@@ -10,7 +10,7 @@ from .channels_dvr import (
     refresh_epg_lineup,
     refresh_m3u_source,
 )
-from .bigtenplus import fetch_bigtenplus_schedule
+from .bigtenplus import build_durations_from_settings, fetch_bigtenplus_schedule
 from .matcher import match_events
 from .playlist import (
     filter_by_keyword,
@@ -32,7 +32,17 @@ DEFAULT_SETTINGS = {
     "min_similarity": 0.85,
     "keyword": "BIG10+",
     "b1g_date": "today",
-    "event_duration_minutes": 180,
+    "default_duration_hours": 3,
+    "baseball_duration_hours": 3.5,
+    "basketball_duration_hours": 3,
+    "football_duration_hours": 3.5,
+    "golf_duration_hours": 6,
+    "hockey_duration_hours": 3,
+    "soccer_duration_hours": 2.5,
+    "tennis_duration_hours": 3,
+    "volleyball_duration_hours": 2.5,
+    "gymnastics_dual_duration_hours": 2,
+    "gymnastics_multi_duration_hours": 3.5,
     "log_level": "INFO",
     "auto_refresh": True,
     "channels_dvr_enabled": False,
@@ -223,18 +233,14 @@ def run_once(settings: dict, dry_run: bool = False, force: bool = False) -> dict
     b1g_entries = filter_entries_by_day(b1g_entries, days)
     logger.info(f"Found {len(b1g_entries)} {keyword} streams with events")
 
-    duration_minutes = settings.get("event_duration_minutes")
-    try:
-        duration_minutes = int(float(duration_minutes))
-    except (TypeError, ValueError):
-        duration_minutes = None
+    durations = build_durations_from_settings(settings)
 
     b1g_events = []
     for day_iso in days:
         b1g_events.extend(
             fetch_bigtenplus_schedule(
                 day_iso,
-                event_duration_minutes=duration_minutes,
+                durations=durations,
             )
         )
 
@@ -244,7 +250,7 @@ def run_once(settings: dict, dry_run: bool = False, force: bool = False) -> dict
         prev_day_iso = (first_day - timedelta(days=1)).strftime("%Y-%m-%d")
         prev_day_events = fetch_bigtenplus_schedule(
             prev_day_iso,
-            event_duration_minutes=duration_minutes,
+            durations=durations,
         )
     except (ValueError, TypeError, IndexError):
         prev_day_events = []

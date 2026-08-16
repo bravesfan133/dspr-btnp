@@ -3,8 +3,12 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 from bigtenplus_plugin.bigtenplus import (
+    build_durations_from_settings,
     build_event_title,
+    build_genre_name,
     count_event_teams,
+    detect_gender,
+    detect_sport_base,
     discover_schedule_module,
     fetch_bigtenplus_schedule,
     get_day_bounds,
@@ -48,6 +52,15 @@ def test_parse_real_day_payload():
     assert soccer["title"] == "Soccer (W) Fordham at Maryland"
     assert soccer["start_time"].startswith("2026-08-16T16:00:00")
     assert soccer["sport"] == "Soccer (W)" == soccer["league"]
+    assert soccer["gender"] == "Women"
+    assert soccer["sport_base"] == "Soccer"
+    assert soccer["genre"] == "NCAA Women's Soccer"
+    assert soccer["home_team"] == "Maryland"
+    assert soccer["away_team"] == "Fordham"
+    assert soccer["conference"] == "Big Ten"
+    assert soccer["duration_minutes"] == 150
+    assert soccer["date"] == 2026
+    assert soccer["subtitle"] == "Fordham at Maryland"
 
 
 def test_parse_scrimmage_uses_editorial_title():
@@ -78,6 +91,36 @@ def test_build_event_title_missing_competitors():
         ],
     }
     assert build_event_title(ev) == "Volleyball (W) Nebraska Red vs. White Scrimmage"
+
+
+def test_detect_gender_from_metadata():
+    ev = make_event(category3="Soccer (W)")
+    ev["metadata"] = [{"field": {"name": "gender"}, "name": "Women"}]
+    assert detect_gender(ev) == "Women"
+
+
+def test_detect_gender_from_suffix():
+    assert detect_gender(make_event(category3="Basketball (M)")) == "Men"
+    assert detect_gender(make_event(category3="Soccer (W)")) == "Women"
+    assert detect_gender(make_event(category3="Football")) == ""
+
+
+def test_detect_sport_base_from_metadata():
+    ev = make_event(category3="Soccer (W)")
+    ev["metadata"] = [{"field": {"name": "sports"}, "name": "Soccer"}]
+    assert detect_sport_base(ev) == "Soccer"
+
+
+def test_detect_sport_base_strips_suffix():
+    assert detect_sport_base(make_event(category3="Ice Hockey (W)")) == "Ice Hockey"
+    assert detect_sport_base(make_event(category3="Baseball")) == "Baseball"
+
+
+def test_build_genre_name():
+    assert build_genre_name("Women", "Soccer") == "NCAA Women's Soccer"
+    assert build_genre_name("Men", "Basketball") == "NCAA Men's Basketball"
+    assert build_genre_name("", "Volleyball") == "NCAA Volleyball"
+    assert build_genre_name("", "") == "NCAA"
 
 
 def test_duration_soccer():
@@ -117,7 +160,30 @@ def test_duration_default():
 
 
 def test_duration_default_override():
-    assert get_duration_minutes(make_event(category3="Cross Country"), default_minutes=240) == 240
+    assert get_duration_minutes(
+        make_event(category3="Cross Country"), durations={"default": 4}
+    ) == 240
+
+
+def test_duration_override_per_sport():
+    assert get_duration_minutes(
+        make_event(category3="Soccer (W)"), durations={"soccer": 2}
+    ) == 120
+
+
+def test_build_durations_from_settings_defaults():
+    durations = build_durations_from_settings({})
+    assert durations["soccer"] == 2.5
+    assert durations["baseball"] == 3.5
+    assert durations["default"] == 3
+    assert durations["gymnastics_dual"] == 2
+    assert durations["gymnastics_multi"] == 3.5
+
+
+def test_build_durations_from_settings_overrides():
+    durations = build_durations_from_settings({"soccer_duration_hours": 2, "bad": "x"})
+    assert durations["soccer"] == 2
+    assert durations["baseball"] == 3.5
 
 
 def test_duration_gymnastics_dual():
