@@ -1,0 +1,1 @@
+"""Dispatcharr plugin that generates a custom B1G+ EPG and syncs it to Dispatcharr."""

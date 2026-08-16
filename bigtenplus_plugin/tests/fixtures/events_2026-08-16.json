@@ -1,0 +1,1093 @@
+{
+ "data": [
+  {
+   "id": 1242922,
+   "moduleContentType": "event",
+   "title": "",
+   "startTime": "2026-08-16T16:00:00+00:00",
+   "endTime": null,
+   "homeCompetitor": {
+    "id": 545002,
+    "srCompetitorId": null,
+    "name": "Maryland",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Terrapins",
+    "shortName": "Maryland",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/6ebd4f68-6036-4178-b224-ac4a77dcf416.png?v=20260730062554"
+    },
+    "alias": "MD",
+    "code": "336",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#CE1126",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "awayCompetitor": {
+    "id": 543858,
+    "srCompetitorId": null,
+    "name": "Fordham",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Rams",
+    "shortName": "Fordham",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/16274c9c-b34d-4e65-8b84-fc7dac2303a8.png?v=20260813183834"
+    },
+    "alias": null,
+    "code": "290",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#860038",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "homeRank": null,
+   "awayRank": null,
+   "srMatchId": null,
+   "category1": {
+    "id": 21285,
+    "name": "Events",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Events"
+    }
+   },
+   "category2": {
+    "id": 21295,
+    "name": "Sport",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Sport"
+    }
+   },
+   "category3": {
+    "id": 22006,
+    "name": "Soccer (W)",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Soccer (W)"
+    }
+   },
+   "metadata": [
+    {
+     "name": "Maryland",
+     "field": {
+      "name": "schools"
+     }
+    },
+    {
+     "name": "Soccer",
+     "field": {
+      "name": "sports"
+     }
+    },
+    {
+     "name": "Women",
+     "field": {
+      "name": "gender"
+     }
+    },
+    {
+     "name": "Big Ten",
+     "field": {
+      "name": "conference rights"
+     }
+    },
+    {
+     "name": "BTN+",
+     "field": {
+      "name": "televised"
+     }
+    },
+    {
+     "name": "B1G+",
+     "field": {
+      "name": "network"
+     }
+    },
+    {
+     "name": "Soccer (W)",
+     "field": {
+      "name": "Sport"
+     }
+    },
+    {
+     "name": "2026/27",
+     "field": {
+      "name": "academic year"
+     }
+    }
+   ],
+   "contents": [
+    {
+     "id": 2205720,
+     "startTime": "2026-08-16T16:00:00+00:00",
+     "endTime": null,
+     "editorial": {
+      "translations": {
+       "en": {
+        "title": "Fordham at Maryland",
+        "description": "Fordham at Maryland"
+       }
+      }
+     },
+     "images": [
+      {
+       "url": "https://www.bigtenplus.com/image/1920x1080/9e8401b1-78ed-4582-b081-38a328b86ddc.png?v=20260729162811"
+      }
+     ]
+    }
+   ],
+   "images": [
+    {
+     "url": "https://www.bigtenplus.com/image/1920x1080/9e8401b1-78ed-4582-b081-38a328b86ddc.png?v=20260729162811"
+    }
+   ]
+  },
+  {
+   "id": 1238527,
+   "moduleContentType": "event",
+   "title": "",
+   "startTime": "2026-08-16T17:00:00+00:00",
+   "endTime": null,
+   "homeCompetitor": {
+    "id": 545167,
+    "srCompetitorId": null,
+    "name": "Minnesota",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Golden Gophers",
+    "shortName": "Minnesota",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/a06b9155-3903-40be-aeaf-cf08410498f5.png?v=20260730062531"
+    },
+    "alias": "MINN",
+    "code": "25",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#5E0A2F",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "awayCompetitor": {
+    "id": 543968,
+    "srCompetitorId": null,
+    "name": "Georgia",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Bulldogs",
+    "shortName": "Georgia",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/f7e82018-6d90-4420-ba2e-4b5316d51feb.png?v=20260807104354"
+    },
+    "alias": null,
+    "code": "413",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#FF0000",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "homeRank": null,
+   "awayRank": "19",
+   "srMatchId": null,
+   "category1": {
+    "id": 21285,
+    "name": "Events",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Events"
+    }
+   },
+   "category2": {
+    "id": 21295,
+    "name": "Sport",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Sport"
+    }
+   },
+   "category3": {
+    "id": 22006,
+    "name": "Soccer (W)",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Soccer (W)"
+    }
+   },
+   "metadata": [
+    {
+     "name": "Women",
+     "field": {
+      "name": "gender"
+     }
+    },
+    {
+     "name": "Minnesota",
+     "field": {
+      "name": "schools"
+     }
+    },
+    {
+     "name": "Soccer",
+     "field": {
+      "name": "sports"
+     }
+    },
+    {
+     "name": "Big Ten",
+     "field": {
+      "name": "conference rights"
+     }
+    },
+    {
+     "name": "Minnesota",
+     "field": {
+      "name": "extra competitors"
+     }
+    },
+    {
+     "name": "BTN+",
+     "field": {
+      "name": "televised"
+     }
+    },
+    {
+     "name": "Soccer (W)",
+     "field": {
+      "name": "Sport"
+     }
+    },
+    {
+     "name": "2026/27",
+     "field": {
+      "name": "academic year"
+     }
+    }
+   ],
+   "contents": [
+    {
+     "id": 2194658,
+     "startTime": "2026-08-16T17:00:00+00:00",
+     "endTime": null,
+     "editorial": {
+      "translations": {
+       "en": {
+        "title": "#19 Georgia at Minnesota",
+        "description": ""
+       }
+      }
+     },
+     "images": [
+      {
+       "url": "https://www.bigtenplus.com/image/1920x1080/e57d90b3-0634-4775-8424-4f64daf9b37c.png?v=20260811195257"
+      }
+     ]
+    }
+   ],
+   "images": [
+    {
+     "url": "https://www.bigtenplus.com/image/1920x1080/e57d90b3-0634-4775-8424-4f64daf9b37c.png?v=20260811195257"
+    }
+   ]
+  },
+  {
+   "id": 1238528,
+   "moduleContentType": "event",
+   "title": "",
+   "startTime": "2026-08-16T17:00:00+00:00",
+   "endTime": null,
+   "homeCompetitor": {
+    "id": 546047,
+    "srCompetitorId": null,
+    "name": "Purdue",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Boilermakers",
+    "shortName": "Purdue",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/1131426b-9934-4954-8761-4e2adfd4345d.png?v=20260730062825"
+    },
+    "alias": "PUR",
+    "code": "21",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#221F1F",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "awayCompetitor": {
+    "id": 546058,
+    "srCompetitorId": null,
+    "name": "Purdue Fort Wayne",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Mastodons",
+    "shortName": "Purdue Fort Wayne",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/0d25b8ae-052d-47fc-bc69-3b9f6f9054ec.png?v=20260813184139"
+    },
+    "alias": null,
+    "code": "455",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#CFB991",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "homeRank": null,
+   "awayRank": null,
+   "srMatchId": null,
+   "category1": {
+    "id": 21285,
+    "name": "Events",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Events"
+    }
+   },
+   "category2": {
+    "id": 21295,
+    "name": "Sport",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Sport"
+    }
+   },
+   "category3": {
+    "id": 22006,
+    "name": "Soccer (W)",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Soccer (W)"
+    }
+   },
+   "metadata": [
+    {
+     "name": "Women",
+     "field": {
+      "name": "gender"
+     }
+    },
+    {
+     "name": "Purdue",
+     "field": {
+      "name": "schools"
+     }
+    },
+    {
+     "name": "Soccer",
+     "field": {
+      "name": "sports"
+     }
+    },
+    {
+     "name": "Big Ten",
+     "field": {
+      "name": "conference rights"
+     }
+    },
+    {
+     "name": "Purdue",
+     "field": {
+      "name": "extra competitors"
+     }
+    },
+    {
+     "name": "BTN+",
+     "field": {
+      "name": "televised"
+     }
+    },
+    {
+     "name": "Soccer (W)",
+     "field": {
+      "name": "Sport"
+     }
+    },
+    {
+     "name": "2026/27",
+     "field": {
+      "name": "academic year"
+     }
+    }
+   ],
+   "contents": [
+    {
+     "id": 2194661,
+     "startTime": "2026-08-16T17:00:00+00:00",
+     "endTime": null,
+     "editorial": {
+      "translations": {
+       "en": {
+        "title": "Purdue Fort Wayne at Purdue",
+        "description": "Purdue Fort Wayne at Purdue"
+       }
+      }
+     },
+     "images": [
+      {
+       "url": "https://www.bigtenplus.com/image/1920x1080/791630a5-3523-40aa-8c98-90280281ccef.jpg?v=20260715131015"
+      }
+     ]
+    }
+   ],
+   "images": [
+    {
+     "url": "https://www.bigtenplus.com/image/1920x1080/791630a5-3523-40aa-8c98-90280281ccef.jpg?v=20260715131015"
+    }
+   ]
+  },
+  {
+   "id": 1238530,
+   "moduleContentType": "event",
+   "title": "",
+   "startTime": "2026-08-16T17:00:00+00:00",
+   "endTime": null,
+   "homeCompetitor": {
+    "id": 544320,
+    "srCompetitorId": null,
+    "name": "Indiana",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Hoosiers",
+    "shortName": "Indiana",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/8a315d49-14f7-448b-a5fc-3978b5c821ec.png?v=20260730062318"
+    },
+    "alias": "IND",
+    "code": "29",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#970310",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "awayCompetitor": {
+    "id": 547972,
+    "srCompetitorId": null,
+    "name": "Youngstown St.",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Penguins",
+    "shortName": "Youngstown St.",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/fcbf978c-1c7d-43dd-b781-b032c60c925f.png?v=20260813184439"
+    },
+    "alias": null,
+    "code": "269",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#EC1C24",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "homeRank": null,
+   "awayRank": null,
+   "srMatchId": null,
+   "category1": {
+    "id": 21285,
+    "name": "Events",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Events"
+    }
+   },
+   "category2": {
+    "id": 21295,
+    "name": "Sport",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Sport"
+    }
+   },
+   "category3": {
+    "id": 22006,
+    "name": "Soccer (W)",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Soccer (W)"
+    }
+   },
+   "metadata": [
+    {
+     "name": "Women",
+     "field": {
+      "name": "gender"
+     }
+    },
+    {
+     "name": "Indiana",
+     "field": {
+      "name": "schools"
+     }
+    },
+    {
+     "name": "Soccer",
+     "field": {
+      "name": "sports"
+     }
+    },
+    {
+     "name": "Big Ten",
+     "field": {
+      "name": "conference rights"
+     }
+    },
+    {
+     "name": "BTN+",
+     "field": {
+      "name": "televised"
+     }
+    },
+    {
+     "name": "Indiana",
+     "field": {
+      "name": "extra competitors"
+     }
+    },
+    {
+     "name": "Soccer (W)",
+     "field": {
+      "name": "Sport"
+     }
+    },
+    {
+     "name": "2026/27",
+     "field": {
+      "name": "academic year"
+     }
+    }
+   ],
+   "contents": [
+    {
+     "id": 2194665,
+     "startTime": "2026-08-16T17:00:00+00:00",
+     "endTime": null,
+     "editorial": {
+      "translations": {
+       "en": {
+        "title": "Youngstown St. at Indiana",
+        "description": "Youngstown St. at Indiana"
+       }
+      }
+     },
+     "images": [
+      {
+       "url": "https://www.bigtenplus.com/image/1920x1080/8529ba20-b984-4bba-b370-a2aee8ea6ae2.jpg?v=20260715131020"
+      }
+     ]
+    }
+   ],
+   "images": [
+    {
+     "url": "https://www.bigtenplus.com/image/1920x1080/8529ba20-b984-4bba-b370-a2aee8ea6ae2.jpg?v=20260715131020"
+    }
+   ]
+  },
+  {
+   "id": 1238529,
+   "moduleContentType": "event",
+   "title": "",
+   "startTime": "2026-08-16T18:00:00+00:00",
+   "endTime": null,
+   "homeCompetitor": {
+    "id": 545563,
+    "srCompetitorId": null,
+    "name": "Nebraska",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Cornhuskers",
+    "shortName": "Nebraska",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/4ba9ae66-544c-4911-bff1-71b4846833e0.png?v=20260730062619"
+    },
+    "alias": "NEB",
+    "code": "27",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#D3122F",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "awayCompetitor": {
+    "id": 546245,
+    "srCompetitorId": null,
+    "name": "S. Dakota",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Coyotes",
+    "shortName": "S. Dakota",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/393899c2-5ee4-4ce5-aa6f-2620a90fe553.png?v=20260813184914"
+    },
+    "alias": null,
+    "code": "241",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#D31F34",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "homeRank": null,
+   "awayRank": null,
+   "srMatchId": null,
+   "category1": {
+    "id": 21285,
+    "name": "Events",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Events"
+    }
+   },
+   "category2": {
+    "id": 21295,
+    "name": "Sport",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Sport"
+    }
+   },
+   "category3": {
+    "id": 22006,
+    "name": "Soccer (W)",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Soccer (W)"
+    }
+   },
+   "metadata": [
+    {
+     "name": "Women",
+     "field": {
+      "name": "gender"
+     }
+    },
+    {
+     "name": "Nebraska",
+     "field": {
+      "name": "schools"
+     }
+    },
+    {
+     "name": "Soccer",
+     "field": {
+      "name": "sports"
+     }
+    },
+    {
+     "name": "Big Ten",
+     "field": {
+      "name": "conference rights"
+     }
+    },
+    {
+     "name": "BTN+",
+     "field": {
+      "name": "televised"
+     }
+    },
+    {
+     "name": "Nebraska",
+     "field": {
+      "name": "extra competitors"
+     }
+    },
+    {
+     "name": "Soccer (W)",
+     "field": {
+      "name": "Sport"
+     }
+    },
+    {
+     "name": "2026/27",
+     "field": {
+      "name": "academic year"
+     }
+    }
+   ],
+   "contents": [
+    {
+     "id": 2194662,
+     "startTime": "2026-08-16T18:00:00+00:00",
+     "endTime": null,
+     "editorial": {
+      "translations": {
+       "en": {
+        "title": "S. Dakota at Nebraska",
+        "description": "S. Dakota at Nebraska"
+       }
+      }
+     },
+     "images": [
+      {
+       "url": "https://www.bigtenplus.com/image/1920x1080/3a4e455a-b34c-43f2-beb6-d39112bf1185.jpg?v=20260715131017"
+      }
+     ]
+    }
+   ],
+   "images": [
+    {
+     "url": "https://www.bigtenplus.com/image/1920x1080/3a4e455a-b34c-43f2-beb6-d39112bf1185.jpg?v=20260715131017"
+    }
+   ]
+  },
+  {
+   "id": 1242921,
+   "moduleContentType": "event",
+   "title": "Red vs. White Scrimmage",
+   "startTime": "2026-08-16T20:00:00+00:00",
+   "endTime": null,
+   "homeCompetitor": null,
+   "awayCompetitor": null,
+   "homeRank": null,
+   "awayRank": null,
+   "srMatchId": null,
+   "category1": {
+    "id": 21285,
+    "name": "Events",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Events"
+    }
+   },
+   "category2": {
+    "id": 21295,
+    "name": "Sport",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Sport"
+    }
+   },
+   "category3": {
+    "id": 21515,
+    "name": "Volleyball (W)",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Volleyball (W)"
+    }
+   },
+   "metadata": [
+    {
+     "name": "Nebraska",
+     "field": {
+      "name": "schools"
+     }
+    },
+    {
+     "name": "Volleyball",
+     "field": {
+      "name": "sports"
+     }
+    },
+    {
+     "name": "Women",
+     "field": {
+      "name": "gender"
+     }
+    },
+    {
+     "name": "Big Ten",
+     "field": {
+      "name": "conference rights"
+     }
+    },
+    {
+     "name": "BTN+",
+     "field": {
+      "name": "televised"
+     }
+    },
+    {
+     "name": "B1G+",
+     "field": {
+      "name": "network"
+     }
+    },
+    {
+     "name": "Volleyball (W)",
+     "field": {
+      "name": "Sport"
+     }
+    },
+    {
+     "name": "2026/27",
+     "field": {
+      "name": "academic year"
+     }
+    },
+    {
+     "name": "Nebraska Public Media",
+     "field": {
+      "name": "network"
+     }
+    }
+   ],
+   "contents": [
+    {
+     "id": 2205716,
+     "startTime": "2026-08-16T20:00:00+00:00",
+     "endTime": null,
+     "editorial": {
+      "translations": {
+       "en": {
+        "title": "Nebraska Red vs. White Scrimmage",
+        "description": ""
+       }
+      }
+     },
+     "images": [
+      {
+       "url": "https://www.bigtenplus.com/image/1920x1080/9bc4f75d-091f-4627-ba85-133d20124fcc.png?v=20260803201228"
+      }
+     ]
+    }
+   ],
+   "images": [
+    {
+     "url": "https://www.bigtenplus.com/image/1920x1080/9bc4f75d-091f-4627-ba85-133d20124fcc.png?v=20260803201228"
+    }
+   ]
+  },
+  {
+   "id": 1242925,
+   "moduleContentType": "event",
+   "title": "",
+   "startTime": "2026-08-16T20:00:00+00:00",
+   "endTime": null,
+   "homeCompetitor": {
+    "id": 545893,
+    "srCompetitorId": null,
+    "name": "Oregon",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Ducks",
+    "shortName": "Oregon",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/8721cc8b-396a-4f46-829f-323a7e591f58.png?v=20260730062734"
+    },
+    "alias": null,
+    "code": "403",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#00934B",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "awayCompetitor": {
+    "id": 544023,
+    "srCompetitorId": null,
+    "name": "Gonzaga",
+    "appAdditionalName": null,
+    "appCleanName": null,
+    "fullName": "Bulldogs",
+    "shortName": "Gonzaga",
+    "image": {
+     "url": "https://www.bigtenplus.com/image/240x240/f76e9983-4e88-4de0-a5d6-1c0e6b645c43.png?v=20260813185318"
+    },
+    "alias": null,
+    "code": "467",
+    "rank": null,
+    "gender": null,
+    "country": null,
+    "colors": {
+     "primaryColor": "#00053E",
+     "secondaryColor": "#FFFFFF",
+     "textColor": "#FFFFFF"
+    },
+    "competitorCategoryId": 766075,
+    "internalCode": null
+   },
+   "homeRank": null,
+   "awayRank": null,
+   "srMatchId": null,
+   "category1": {
+    "id": 21285,
+    "name": "Events",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Events"
+    }
+   },
+   "category2": {
+    "id": 21295,
+    "name": "Sport",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Sport"
+    }
+   },
+   "category3": {
+    "id": 22006,
+    "name": "Soccer (W)",
+    "externalCode": null,
+    "logo": null,
+    "translations": {
+     "en": "Soccer (W)"
+    }
+   },
+   "metadata": [
+    {
+     "name": "Soccer",
+     "field": {
+      "name": "sports"
+     }
+    },
+    {
+     "name": "Women",
+     "field": {
+      "name": "gender"
+     }
+    },
+    {
+     "name": "Big Ten",
+     "field": {
+      "name": "conference rights"
+     }
+    },
+    {
+     "name": "BTN+",
+     "field": {
+      "name": "televised"
+     }
+    },
+    {
+     "name": "B1G+",
+     "field": {
+      "name": "network"
+     }
+    },
+    {
+     "name": "Soccer (W)",
+     "field": {
+      "name": "Sport"
+     }
+    },
+    {
+     "name": "Oregon",
+     "field": {
+      "name": "schools"
+     }
+    },
+    {
+     "name": "2026/27",
+     "field": {
+      "name": "academic year"
+     }
+    }
+   ],
+   "contents": [
+    {
+     "id": 2205724,
+     "startTime": "2026-08-16T20:00:00+00:00",
+     "endTime": null,
+     "editorial": {
+      "translations": {
+       "en": {
+        "title": "Gonzaga at Oregon",
+        "description": "Gonzaga at Oregon"
+       }
+      }
+     },
+     "images": [
+      {
+       "url": "https://www.bigtenplus.com/image/1920x1080/95b922d7-9178-4e03-b6fa-76bdf3a081ac.png?v=20260729163140"
+      }
+     ]
+    }
+   ],
+   "images": [
+    {
+     "url": "https://www.bigtenplus.com/image/1920x1080/95b922d7-9178-4e03-b6fa-76bdf3a081ac.png?v=20260729163140"
+    }
+   ]
+  }
+ ],
+ "meta": {
+  "current_page": 1,
+  "from": 1,
+  "last_page": 1,
+  "path": "https://www.bigtenplus.com/api/v3/modules/138951/contents",
+  "per_page": 25,
+  "to": 7,
+  "total": 7
+ }
+}
